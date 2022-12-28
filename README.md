@@ -1,5 +1,8 @@
 # family-finance
 
+Project created on Vue3 with Firebase
+___
+
 ## Project setup
 ```
 npm install
