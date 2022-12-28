@@ -47,7 +47,7 @@
 </template>
 
 <script>
-// import M from 'materialize-css'
+import M from 'materialize-css'
 
 export default {
   data() {
@@ -70,7 +70,6 @@ export default {
       this.date = Date.now();
     }, 1000)
 
-    // eslint-disable-next-line no-undef
     this.drepdown = M.Dropdown.init(this.$refs.dropdown, {coverTrigger: true, constrainWidth: false});
   },
   beforeUnmount() {
