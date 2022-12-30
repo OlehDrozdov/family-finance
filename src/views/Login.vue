@@ -49,6 +49,7 @@
 <script>
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
+import notifications from '@/utils/notifications'
 
 export default {
   name: 'login',
@@ -63,6 +64,11 @@ export default {
     return {
       email: { required, email },
       password: { required, minLength: minLength(8) }
+    }
+  },
+  mounted() {
+    if (notifications[this.$route.query.message]) {
+      this.$notification(notifications[this.$route.query.message])
     }
   },
   methods: {

@@ -5,7 +5,7 @@
         <a href="#" @click="$emit('toggle')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ $filters.dateFilter(date, 'date time') }}</span>
+        <span class="black-text">{{ $dateFilter(date, 'date time') }}</span>
         
       </div>
 
@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     logout() {
-      this.$router.push('/login?message=')
+      this.$router.push('/login?message=logout')
     }
   },
   mounted() {

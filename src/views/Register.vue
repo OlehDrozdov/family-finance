@@ -48,6 +48,21 @@
           {{ v$.password.$errors[0].$message }}
         </small>
       </div>
+      <div class="input-field">
+        <input
+          id="confirmPassword"
+          type="password"
+          v-model.trim="confirmPassword"
+          :class="{invalid: v$.confirmPassword.$error}"
+        >
+        <label for="confirmPassword">Confirm password</label>
+        <small
+          v-if="v$.confirmPassword.$error"
+          class="helper-text invalid"
+        >
+          {{ v$.confirmPassword.$errors[0].$message }}
+        </small>
+      </div>
       <div>
         <label>
           <input
@@ -91,6 +106,7 @@ export default {
       email: '',
       name: '',
       password: '',
+      confirmPassword: '',
       terms: false      
     }
   },
@@ -99,6 +115,7 @@ export default {
       email: { required, email },
       name: { required, minLength: minLength(3) },
       password: { required, minLength: minLength(8) },
+      confirmPassword: { required, sameAsPassword: sameAs(this.password) },
       terms: {
         sameAs: sameAs(true) 
       }
