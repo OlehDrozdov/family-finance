@@ -78,8 +78,16 @@ export default {
       if (!result) {
         return;
       } 
+
+      const formData = {
+        email: this.email,
+        password: this.password
+      }
+
+      await this.$store.dispatch('login', formData)
+      .then(() => this.$router.push('/'))
+      .catch((error) => console.log(error));
       
-      this.$router.push('/');
     }
   }
 }
