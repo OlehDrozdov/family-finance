@@ -49,7 +49,7 @@
 <script>
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
-import notifications from '@/utils/notifications'
+import messages from '@/utils/messages'
 
 export default {
   name: 'login',
@@ -67,14 +67,14 @@ export default {
     }
   },
   mounted() {
-    if (notifications[this.$route.query.message]) {
-      this.$notification(notifications[this.$route.query.message])
+    if (messages[this.$route.query.message]) {
+      this.$notification(messages[this.$route.query.message]);
     }
   },
   methods: {
     async onSubmit() {
       const result = await this.v$.$validate();
-      
+
       if (!result) {
         return;
       } 
@@ -83,11 +83,9 @@ export default {
         email: this.email,
         password: this.password
       }
-
-      await this.$store.dispatch('login', formData)
-      .then(() => this.$router.push('/'))
-      .catch((error) => console.log(error));
       
+      await this.$store.dispatch('login', formData);
+      this.$router.push('/');
     }
   }
 }

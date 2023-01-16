@@ -15,7 +15,7 @@ export default {
     }
 
     app.config.globalProperties.$errorNotification = function(html) {
-      M.toast({ html, classes: 'red darken-3' })
+      M.toast({ html, classes: 'red darken-3', displayLength: 7000 })
     }
   }
 }

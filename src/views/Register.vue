@@ -97,6 +97,7 @@
 <script>
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength, sameAs } from '@vuelidate/validators'
+import messages from '@/utils/messages'
 
 export default {
   name: 'register',
@@ -127,8 +128,16 @@ export default {
       
       if (!result) {
         return;
-      } 
+      }
+
+      const formData = {
+        email: this.email,
+        name: this.name,
+        password: this.password
+      }
       
+      await this.$store.dispatch('register', formData);
+      this.$successNotification(messages['register']);
       this.$router.push('/login');
     }
   }
