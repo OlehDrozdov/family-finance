@@ -1,5 +1,5 @@
 <template>
-  <form class="card auth-card">
+  <form class="card auth-card" @submit.prevent="onSubmit">
     <div class="card-content">
       <a href="https://creativesociety.com/" target="_blank">
         <img alt="creative-society-logo" src="@/assets/cs-logo-gold.svg" style="width: 40px; float: right" />
@@ -9,21 +9,27 @@
         <input
           id="email"
           type="text"
+          v-model.trim="email"
+          :class="{invalid: v$.email.$error}"
         >
         <label for="email">Email</label>
-        <small
+        <small 
+          v-if="v$.email.$error"
           class="helper-text invalid"
-        >Email error message</small>
+        >{{ v$.email.$errors[0].$message }}</small>
       </div>
       <div class="input-field">
         <input
           id="password"
           type="password"
+          v-model.trim="password"
+          :class="{invalid: v$.password.$error}"
         >
         <label for="password">Password</label>
         <small
+          v-if="v$.password.$error"
           class="helper-text invalid"
-        >Password error message</small>
+        >{{ v$.password.$errors[0].$message }}</small>
       </div>
     </div>
     <div class="card-action">
@@ -39,3 +45,48 @@
     </div>
   </form>
 </template>
+
+<script>
+import { useVuelidate } from '@vuelidate/core'
+import { required, email, minLength } from '@vuelidate/validators'
+import messages from '@/utils/messages'
+
+export default {
+  name: 'login',
+  data() {
+    return {
+      v$: useVuelidate(),
+      email: '',
+      password: ''
+    }
+  },
+  validations() {
+    return {
+      email: { required, email },
+      password: { required, minLength: minLength(8) }
+    }
+  },
+  mounted() {
+    if (messages[this.$route.query.message]) {
+      this.$notification(messages[this.$route.query.message]);
+    }
+  },
+  methods: {
+    async onSubmit() {
+      const result = await this.v$.$validate();
+
+      if (!result) {
+        return;
+      } 
+
+      const formData = {
+        email: this.email,
+        password: this.password
+      }
+      
+      await this.$store.dispatch('login', formData);
+      this.$router.push('/');
+    }
+  }
+}
+</script>

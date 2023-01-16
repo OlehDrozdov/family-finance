@@ -5,7 +5,7 @@
         <a href="#" @click="$emit('toggle')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ $filters.dateFilter(date, 'date time') }}</span>
+        <span class="black-text">{{ $dateFilter(date, 'date time') }}</span>
         
       </div>
 
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-// import M from 'materialize-css'
+import M from 'materialize-css'
 
 export default {
   data() {
@@ -61,8 +61,9 @@ export default {
 
   },
   methods: {
-    logout() {
-      this.$router.push('/login?message=')
+    async logout() {
+      await this.$store.dispatch('logout');
+      this.$router.push('/login?message=logout')
     }
   },
   mounted() {
@@ -70,7 +71,6 @@ export default {
       this.date = Date.now();
     }, 1000)
 
-    // eslint-disable-next-line no-undef
     this.drepdown = M.Dropdown.init(this.$refs.dropdown, {coverTrigger: true, constrainWidth: false});
   },
   beforeUnmount() {
