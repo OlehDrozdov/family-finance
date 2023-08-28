@@ -1,0 +1,33 @@
+import { getDatabase, ref, child, get } from "firebase/database";
+
+export default {
+  state: {
+    info: {}
+  },
+  mutations: {
+    setInfo(state, info) {
+      state.info = info;
+    },
+    clearInfo(state) {
+      state.info = {};
+    }
+  },
+  actions: {
+    async fetchInfo({dispatch, commit}) {
+      const uid = await dispatch('getUserUid');
+      const dbRef = ref(getDatabase());
+      get(child(dbRef, `users/${uid}/info`)).then((data) => {
+        if (data.exists()) {
+          commit('setInfo', data.val());
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        commit('setError', error);
+      });
+    }
+  },
+  getters: {
+    info: state => state.info
+  }
+}

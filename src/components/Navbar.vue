@@ -5,10 +5,9 @@
         <a href="#" @click="$emit('toggle')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ $dateFilter(date, 'date time') }}</span>
+        <span class="black-text">{{ $dateFilter(date, 'date') }}</span>
         
       </div>
-
       <ul class="right hide-on-small-and-down">
         <li>
           <a 
@@ -17,10 +16,9 @@
             data-target="dropdown" 
             ref="dropdown"
           >
-            name
+            {{name}}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
-
           <ul id="dropdown" class="dropdown-content">
             <li>
               <router-link to="/profile" class="black-text">
@@ -54,16 +52,19 @@ export default {
     return {
       date: Date.now(),
       dateInterval: null,
-      dropdown: null
+      dropdown: null,
+      loading: true
     }
   },
   computed: {
-
+    name() {
+      return this.$store.getters.info.username;
+    }
   },
   methods: {
     async logout() {
       await this.$store.dispatch('logout');
-      this.$router.push('/login?message=logout')
+      this.$router.push('/login?message=logout');
     }
   },
   mounted() {
