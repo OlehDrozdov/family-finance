@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import dateFilter from './filters/date.filter'
+import currencyFilter from './filters/currency.filter'
 import notificationPlugin from '@/utils/notification.plugin'
 import Loader from '@/components/Loader'
 import './registerServiceWorker'
@@ -32,6 +33,7 @@ onAuthStateChanged(auth, () => {
     app.use(store);
     app.use(router);
     app.use(dateFilter);
+    app.use(currencyFilter);
     app.use(notificationPlugin);
     app.component('Loader', Loader);
     

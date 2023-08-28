@@ -13,11 +13,14 @@
               <th>Date</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>currency</td>
-              <td>rates</td>
-              <td>date</td>
+          <tbody>            
+            <tr 
+              v-for="currency in currencies"
+              :key="currency"
+            >
+              <td>{{ currency }}</td>              
+              <td>{{ rates[currency].toFixed(3) }}</td>
+              <td>{{ $dateFilter(date, 'date') }}</td>
             </tr>
           </tbody>
         </table>
@@ -25,6 +28,17 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ['rates', 'date'],
+  data() {
+    return {
+      currencies: ['USD', 'UAH', 'EUR']
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 </style>
