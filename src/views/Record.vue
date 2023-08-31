@@ -53,7 +53,7 @@
         >Message_EnterDescription</span>
       </div>
 
-      <button class="btn waves-effect waves-light" type="submit">
+      <button class="btn" type="submit">
         Create
         <i class="material-icons right">send</i>
       </button>

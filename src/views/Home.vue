@@ -2,7 +2,7 @@
   <div>
     <div class="page-title">
       <h3>Bill</h3>
-      <button class="btn waves-effect waves-teal btn-small" @click="refresh">
+      <button class="btn btn-small" @click="refresh">
         <i class="material-icons">refresh</i>
       </button>
     </div>
@@ -29,21 +29,21 @@ export default {
      }
   },
   async mounted() {
-    this.currency = await this.$store.dispatch('fetchCurrency');
-    // this.currency = {};
-    // this.currency.rates = {
-    //   'EUR': 1,
-    //   'USD': 1.080223,
-    //   'UAH': 39.898291
-    // }
-    // this.currency.date ='2023-08-28';
+    // this.currency = await this.$store.dispatch('fetchCurrency');
+    this.currency = {};
+    this.currency.rates = {
+      'EUR': 1,
+      'USD': 1.080223,
+      'UAH': 39.898291
+    }
+    this.currency.date ='2023-08-30';
     
     this.loading = false;
   },
   methods: {
     async refresh() {
       this.loading = true;
-      this.currency = await this.$store.dispatch('fetchCurrency');
+      // this.currency = await this.$store.dispatch('fetchCurrency');
       this.loading = false;
     }
   },

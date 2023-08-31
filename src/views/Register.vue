@@ -82,7 +82,7 @@
     </div>
     <div class="card-action">
       <div>
-        <button class="btn waves-effect waves-light auth-submit" type="submit">
+        <button class="btn auth-submit" type="submit">
           Register
           <i class="material-icons right">send</i>
         </button>
@@ -126,9 +126,7 @@ export default {
     async onSubmit() {
       const result = await this.v$.$validate();
       
-      if (!result) {
-        return;
-      }
+      if (!result) return;
 
       const formData = {
         email: this.email,

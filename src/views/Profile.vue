@@ -25,7 +25,7 @@
         </label>
       </div>
 
-      <button class="btn waves-effect waves-light" type="submit">
+      <button class="btn" type="submit">
         Update
         <i class="material-icons right">send</i>
       </button>
