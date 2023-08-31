@@ -16,15 +16,13 @@ export default {
     async fetchInfo({dispatch, commit}) {
       const uid = await dispatch('getUserUid');
       const dbRef = ref(getDatabase());
-      get(child(dbRef, `users/${uid}/info`)).then((data) => {
-        if (data.exists()) {
-          commit('setInfo', data.val());
-        } else {
-          console.log("No data available");
-        }
-      }).catch((error) => {
+
+      try {
+        const info = await get(child(dbRef, `users/${uid}/info`));
+        commit('setInfo', info.val());
+      } catch (error) {
         commit('setError', error);
-      });
+      }
     }
   },
   getters: {

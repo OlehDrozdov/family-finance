@@ -6,7 +6,7 @@
     <li
       v-for='link in links'
       :key="link.url"
-      class="waves-effect waves-amber pointer"
+      class="pointer"
     >
       <router-link
         active-class="active amber lighten-2"

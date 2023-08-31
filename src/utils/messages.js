@@ -5,5 +5,8 @@ export default {
   // error messages
   'auth/user-not-found': 'User not found. Check your email and try again.',
   'auth/wrong-password': 'Wrong password. Try again.',
-  'auth/email-already-in-use': 'Email already exists.'
+  'auth/email-already-in-use': 'Email already exists.',
+
+  'category/create': 'New category was created',
+  'category/dublicate': 'This category already exists'
 }
