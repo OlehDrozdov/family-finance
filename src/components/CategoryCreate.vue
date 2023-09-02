@@ -25,7 +25,7 @@
             id="limit"
             type="number"
             v-model.number="limit"
-            :class="{invalid: v$.limit.error}"
+            :class="{invalid: v$.limit.$error}"
           >
           <label for="limit">Limit</label>
           <span
@@ -47,8 +47,8 @@
 <script>
 import { useVuelidate } from '@vuelidate/core'
 import { required, minValue } from '@vuelidate/validators'
-import messages from '@/utils/messages'
 import M from 'materialize-css'
+import messages from '@/utils/messages'
 
 export default {
   data() {
@@ -61,7 +61,7 @@ export default {
   validations() {
     return {
       title: { required },
-      limit: { minValue: minValue(10) }
+      limit: { required, minValue: minValue(10) }
     }
   },
   mounted() {
@@ -73,13 +73,8 @@ export default {
 
       if (!result) return;
 
-      const formData = {
-        title: this.title,
-        limit: this.limit
-      }
-
       try {
-        const category = await this.$store.dispatch('createCategory', formData);
+        const category = await this.$store.dispatch('createCategory', {title: this.title, limit: this.limit});
         this.title = '';
         this.limit = 10;
         this.v$.$reset();

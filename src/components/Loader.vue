@@ -1,5 +1,5 @@
 <template>
-  <div class="row center">
+  <div class="row center loaderContainer">
     <div class="preloader-wrapper active">
       <div class="spinner-layer" :class="color">
         <div class="circle-clipper left">
@@ -24,3 +24,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .loaderContainer {
+    margin-top: 25vh;
+  }
+</style>
