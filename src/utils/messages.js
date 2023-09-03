@@ -10,5 +10,9 @@ export default {
   // category messages
   'category/create': 'New category was created',
   'category/update': 'The category was updated',
-  'category/dublicate': 'This category already exists'
+  'category/dublicate': 'This category already exists',
+
+  //record messages
+  'record/create': 'New record was created',
+  'record/not-enough-funds': 'Not enough funds on balance'
 }

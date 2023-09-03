@@ -1,4 +1,4 @@
-import { getDatabase, ref, child, get } from "firebase/database";
+import { getDatabase, ref, get, set } from "firebase/database";
 
 export default {
   state: {
@@ -15,11 +15,23 @@ export default {
   actions: {
     async fetchInfo({dispatch, commit}) {
       const uid = await dispatch('getUserUid');
-      const dbRef = ref(getDatabase());
+      const userInfoRef = ref(getDatabase(), `/users/${uid}/info`);
 
       try {
-        const info = await get(child(dbRef, `users/${uid}/info`));
+        const info = await get(userInfoRef);
         commit('setInfo', info.val());
+      } catch (error) {
+        commit('setError', error);
+      }
+    },
+    async updateInfo({dispatch, commit, getters}, updateInfo) {
+      const uid = await dispatch('getUserUid');
+      const userInfoRef = ref(getDatabase(), `/users/${uid}/info`);
+      const updateInfoData = {...getters.info, ...updateInfo};
+
+      try {
+        await set(userInfoRef, updateInfoData);
+        commit('setInfo', updateInfoData);
       } catch (error) {
         commit('setError', error);
       }

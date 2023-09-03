@@ -32,7 +32,7 @@ export default {
         { title: 'Bill', url: '/', exact: true },
         { title: 'History', url: '/history', exact: true },
         { title: 'Planning', url: '/planning' },
-        { title: 'New', url: '/record' },
+        { title: 'Record', url: '/record' },
         { title: 'Categories', url: '/categories' }
       ]
     }

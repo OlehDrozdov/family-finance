@@ -1,4 +1,4 @@
-import { getDatabase, ref, push, get, set, child } from "firebase/database";
+import { getDatabase, ref, push, get, set } from "firebase/database";
 
 export default {
   actions: {

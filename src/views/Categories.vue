@@ -11,7 +11,7 @@
           v-if="categories.length" 
           :categories="categories"
           :key="categories.length + updateCount"
-          @updated="updateCategories"
+          @updated="updateCategory"
         />
         <p v-else class="center">No categories</p>
       </div>
@@ -41,11 +41,13 @@ export default {
     addNewCategory(category) {
       this.categories.push(category);
     },
-    async updateCategories(updatedCategory) {
-      const index = this.categories.findIndex(category => category.id === updatedCategory.id);
-      this.categories[index].title = updatedCategory.title;
-      this.categories[index].limit = updatedCategory.limit;
-      this.updateCount++;
+    updateCategory(updatedCategory) {
+      const categoryToUpdate = this.categories.find(category => category.id === updatedCategory.id);
+      if (categoryToUpdate) {
+        categoryToUpdate.title = updatedCategory.title;
+        categoryToUpdate.limit = updatedCategory.limit;
+        this.updateCount++;
+      }
     }
   },
   components: {
