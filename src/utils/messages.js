@@ -1,8 +1,8 @@
 export default {
-  'logout': 'You have been logged out',
-  'register': 'Congratulations, your account has been successfully created',
-
-  // error messages
+  // auth messages
+  'auth/logout': 'You have been logged out',
+  'auth/register': 'Congratulations, your account has been successfully created',
+  'auth/not-logged': 'You are not logged in',
   'auth/user-not-found': 'User not found. Check your email and try again.',
   'auth/wrong-password': 'Wrong password. Try again.',
   'auth/email-already-in-use': 'Email already exists.',

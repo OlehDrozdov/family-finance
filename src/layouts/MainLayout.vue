@@ -26,6 +26,7 @@
 <script>
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
+import messages from '@/utils/messages'
 
 export default {
   name: 'main-layout',
@@ -33,6 +34,16 @@ export default {
     return {
       isSidebarOpen: true,
       loading: true
+    }
+  },
+  computed: {
+    error() {
+      return this.$store.getters.error;
+    }
+  },
+  watch: {
+    error(firebaseError) {
+      this.$errorNotification(messages[firebaseError.code] || 'Something went wrong.');
     }
   },
   async mounted() {

@@ -69,6 +69,7 @@ export default {
   mounted() {
     if (messages[this.$route.query.message]) {
       this.$notification(messages[this.$route.query.message]);
+      this.$router.replace('/login');
     }
   },
   methods: {

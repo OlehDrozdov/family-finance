@@ -135,7 +135,7 @@ export default {
       }
       
       await this.$store.dispatch('register', formData);
-      this.$successNotification(messages['register']);
+      this.$successNotification(messages['auth/register']);
       this.$router.push('/login');
     }
   }
