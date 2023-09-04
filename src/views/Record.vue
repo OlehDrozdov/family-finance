@@ -160,7 +160,9 @@ export default {
           this.$errorNotification(messages[error]);
         }
       } else {
-        this.$errorNotification(`${messages['record/not-enough-funds']} (${this.amount - this.info.bill} $)`);
+        this.$errorNotification(
+          `${messages['record/not-enough-funds']} (${this.$currencyFilter(this.amount - this.info.bill)})`
+        );
       }
     }
   },

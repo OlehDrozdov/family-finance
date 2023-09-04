@@ -15,7 +15,7 @@
       </main>
 
       <div class="fixed-action-btn">
-        <router-link to="/record" class="btn-floating btn-large">
+        <router-link to="/record" class="btn-floating btn-large" v-tooltip="'Add new record'" data-position="left">
           <i class="large material-icons">add</i>
         </router-link>
       </div>

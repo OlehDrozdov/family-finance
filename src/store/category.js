@@ -2,18 +2,6 @@ import { getDatabase, ref, push, get, set } from "firebase/database";
 
 export default {
   actions: {
-    async fetchCategories({dispatch, commit}) {
-      try {
-        const uid = await dispatch('getUserUid');
-        const categoriesRef = ref(getDatabase(), `/users/${uid}/categories`);
-        const categories = (await get(categoriesRef)).val() || {};
-
-        return Object.keys(categories).map((key) => ({...categories[key], id: key}));
-      } catch (error) {
-        commit('setError', error);
-        throw error;
-      }
-    },
     async createCategory({dispatch, commit}, {title, limit}) {
       try {
         const uid = await dispatch('getUserUid');
@@ -35,6 +23,18 @@ export default {
           limit,
           id: categoryRef.key,
         };
+      } catch (error) {
+        commit('setError', error);
+        throw error;
+      }
+    },
+    async fetchCategories({dispatch, commit}) {
+      try {
+        const uid = await dispatch('getUserUid');
+        const categoriesRef = ref(getDatabase(), `/users/${uid}/categories`);
+        const categories = (await get(categoriesRef)).val() || {};
+
+        return Object.keys(categories).map((key) => ({...categories[key], id: key}));
       } catch (error) {
         commit('setError', error);
         throw error;

@@ -5,6 +5,7 @@ import store from './store'
 import dateFilter from './filters/date.filter'
 import currencyFilter from './filters/currency.filter'
 import notificationPlugin from '@/utils/notification.plugin'
+import tooltipDirective from './directives/tooltip.directive'
 import Loader from '@/components/Loader'
 import './registerServiceWorker'
 import 'materialize-css/dist/js/materialize.min'
@@ -35,8 +36,9 @@ onAuthStateChanged(auth, () => {
     app.use(dateFilter);
     app.use(currencyFilter);
     app.use(notificationPlugin);
+    app.directive('tooltip', tooltipDirective);
     app.component('Loader', Loader);
-    
+
     app.mount('#app');
   }
 });

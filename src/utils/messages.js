@@ -14,5 +14,9 @@ export default {
 
   //record messages
   'record/create': 'New record was created',
-  'record/not-enough-funds': 'Not enough funds on balance'
+  'record/not-enough-funds': 'Not enough funds on balance',
+
+  //planing messages
+  'planning/exceeded': 'The limit exceeded by',
+  'planning/left': 'The limit left is'
 }
