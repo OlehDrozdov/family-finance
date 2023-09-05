@@ -49,6 +49,13 @@
   box-shadow: 0 1px 0 0 #26a69a;
 } */
 
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .empty-layout {
   display: -webkit-flex;
   display: -ms-flexbox;

@@ -27,6 +27,6 @@ export default {
 
 <style lang="scss" scoped>
   .loaderContainer {
-    margin-top: 25vh;
+    margin-top: 15px;
   }
 </style>

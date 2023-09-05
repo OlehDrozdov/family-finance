@@ -9,7 +9,7 @@
           <thead>
             <tr>
               <th>Currency</th>
-              <th>CurrencyType</th>
+              <th>Rate</th>
               <th>Date</th>
             </tr>
           </thead>

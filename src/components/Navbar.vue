@@ -5,7 +5,7 @@
         <a href="#" @click="$emit('toggle')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ $dateFilter(date, 'date') }}</span>
+        <span class="black-text">{{ $dateFilter(date, 'fulltime') }}</span>
         
       </div>
       <ul class="right hide-on-small-and-down">
@@ -16,7 +16,7 @@
             data-target="dropdown" 
             ref="dropdown"
           >
-            {{name}}
+            {{ name }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
           <ul id="dropdown" class="dropdown-content">
