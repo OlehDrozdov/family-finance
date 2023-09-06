@@ -6,7 +6,7 @@
     <li
       v-for='link in links'
       :key="link.url"
-      class="waves-effect waves-amber pointer"
+      class="pointer"
     >
       <router-link
         active-class="active amber lighten-2"
@@ -21,6 +21,7 @@
 
 <script>
 export default {
+  name: 'sidebar-component',
   props: {
     modelValue: {
       type: Boolean
@@ -32,7 +33,7 @@ export default {
         { title: 'Bill', url: '/', exact: true },
         { title: 'History', url: '/history', exact: true },
         { title: 'Planning', url: '/planning' },
-        { title: 'New', url: '/record' },
+        { title: 'Record', url: '/record' },
         { title: 'Categories', url: '/categories' }
       ]
     }

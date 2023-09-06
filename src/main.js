@@ -3,11 +3,15 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import dateFilter from './filters/date.filter'
+import currencyFilter from './filters/currency.filter'
 import notificationPlugin from '@/utils/notification.plugin'
+import tooltipDirective from './directives/tooltip.directive'
+import Loader from '@/components/Loader'
 import './registerServiceWorker'
 import 'materialize-css/dist/js/materialize.min'
 
 import { initializeApp } from "firebase/app";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 initializeApp({
   apiKey: "AIzaSyCKQuCbe4NDxf3ZZbeFYJ9mYgeDcUUqaTs",
@@ -19,11 +23,23 @@ initializeApp({
   measurementId: "G-V4MC633Y3D"
 });
 
-let app = createApp(App);
+let app;
 
-app.use(store);
-app.use(router);
-app.use(dateFilter);
-app.use(notificationPlugin);
+const auth = getAuth();
+onAuthStateChanged(auth, () => {
 
-app.mount('#app');
+  if (!app) {
+    app = createApp(App);
+
+    app.use(store);
+    app.use(router);
+    app.use(dateFilter);
+    app.use(currencyFilter);
+    app.use(notificationPlugin);
+    app.directive('tooltip', tooltipDirective);
+    // eslint-disable-next-line
+    app.component('Loader', Loader);
+
+    app.mount('#app');
+  }
+});

@@ -7,7 +7,7 @@ export default {
       const user = getAuth().currentUser;
       return user ? user.uid : null
     },
-    async login({dispatch, commit}, {email, password}) {
+    async login({commit}, {email, password}) {
       const auth = getAuth();
       try {
         await signInWithEmailAndPassword(auth, email, password)
@@ -31,9 +31,10 @@ export default {
         throw error;
       }
     },
-    async logout() {
+    async logout({commit}) {
       const auth = getAuth();
       await signOut(auth);
+      commit('clearInfo');
     }
   }
 }

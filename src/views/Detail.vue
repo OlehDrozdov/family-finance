@@ -25,3 +25,9 @@
     <p class="center">Not found</p>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'detail-component'
+}
+</script>

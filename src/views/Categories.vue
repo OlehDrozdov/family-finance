@@ -4,79 +4,55 @@
       <h3>Categories</h3>
     </div>
     <section>
-      <div class="row">
-        <div class="col s12 m6">
-          <div>
-            <div class="page-subtitle">
-              <h4>Create</h4>
-            </div>
-            <form>
-              <div class="input-field">
-                <input
-                  id="name"
-                  type="text"
-                >
-                <label for="name">Title</label>
-                <span class="helper-text invalid">Message_CategoryTitle</span>
-              </div>
-              <div class="input-field">
-                <input
-                  id="limit"
-                  type="number"
-                >
-                <label for="limit">Limit</label>
-                <span
-                  class="helper-text invalid"
-                >Message_MinLength</span>
-              </div>
-              <button class="btn waves-effect waves-light" type="submit">
-                Create
-                <i class="material-icons right">send</i>
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="col s12 m6">
-          <div>
-            <div class="page-subtitle">
-              <h4>Edit</h4>
-            </div>
-              <form>
-                <div class="input-field">
-                  <select ref="select">
-                    <option >title</option>
-                  </select>
-                  <label>SelectCategory</label>
-                </div>
-                <div class="input-field">
-                  <input
-                    id="name"
-                    type="text"
-                  >
-                  <label for="name">Title</label>
-                  <span
-                    class="helper-text invalid"
-                  >Message_CategoryTitle</span>
-                </div>
-                <div class="input-field">
-                  <input
-                    id="limit"
-                    type="number"
-                  >
-                  <label for="limit">Limit</label>
-                  <span
-                    class="helper-text invalid"
-                  >Message_MinLength</span>
-                </div>
-                <button class="btn waves-effect waves-light" type="submit">
-                  Update
-                  <i class="material-icons right">send</i>
-                </button>
-              </form>
-            </div>
-         </div>
-        <p class="center">NoCategories</p>
+      <Loader v-if="loading" />
+      <div v-else class="row">
+        <CategoryCreate @created="addNewCategory"/>
+        <CategoryEdit 
+          v-if="categories.length" 
+          :categories="categories"
+          :key="categories.length + updateCount"
+          @updated="updateCategory"
+        />
+        <p v-else class="center">No categories</p>
       </div>
+      
     </section>
   </div>
 </template>
+
+<script>
+import CategoryCreate from '@/components/CategoryCreate'
+import CategoryEdit from '@/components/CategoryEdit'
+
+export default {
+  name: 'categories-component',
+  data() {
+    return {
+      categories: [],
+      loading: true,
+      updateCount: 0
+    }
+  },
+  async mounted() {
+    this.categories = await this.$store.dispatch('fetchCategories');
+    this.loading = false;
+  },
+  methods: {
+    addNewCategory(category) {
+      this.categories.push(category);
+    },
+    updateCategory(updatedCategory) {
+      const categoryToUpdate = this.categories.find(category => category.id === updatedCategory.id);
+      if (categoryToUpdate) {
+        categoryToUpdate.title = updatedCategory.title;
+        categoryToUpdate.limit = updatedCategory.limit;
+        this.updateCount++;
+      }
+    }
+  },
+  components: {
+    CategoryCreate,
+    CategoryEdit
+  }
+}
+</script>

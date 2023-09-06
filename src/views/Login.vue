@@ -34,7 +34,7 @@
     </div>
     <div class="card-action">
       <div>
-        <button class="btn waves-effect waves-light auth-submit" type="submit">
+        <button class="btn auth-submit" type="submit">
           Login
           <i class="material-icons right">send</i>
         </button>
@@ -52,7 +52,7 @@ import { required, email, minLength } from '@vuelidate/validators'
 import messages from '@/utils/messages'
 
 export default {
-  name: 'login',
+  name: 'login-component',
   data() {
     return {
       v$: useVuelidate(),
@@ -69,6 +69,7 @@ export default {
   mounted() {
     if (messages[this.$route.query.message]) {
       this.$notification(messages[this.$route.query.message]);
+      this.$router.replace('/login');
     }
   },
   methods: {

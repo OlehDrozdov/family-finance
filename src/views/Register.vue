@@ -82,7 +82,7 @@
     </div>
     <div class="card-action">
       <div>
-        <button class="btn waves-effect waves-light auth-submit" type="submit">
+        <button class="btn auth-submit" type="submit">
           Register
           <i class="material-icons right">send</i>
         </button>
@@ -100,7 +100,7 @@ import { required, email, minLength, sameAs } from '@vuelidate/validators'
 import messages from '@/utils/messages'
 
 export default {
-  name: 'register',
+  name: 'register-component',
   data() {
     return {
       v$: useVuelidate(),
@@ -126,9 +126,7 @@ export default {
     async onSubmit() {
       const result = await this.v$.$validate();
       
-      if (!result) {
-        return;
-      }
+      if (!result) return;
 
       const formData = {
         email: this.email,
@@ -137,7 +135,7 @@ export default {
       }
       
       await this.$store.dispatch('register', formData);
-      this.$successNotification(messages['register']);
+      this.$successNotification(messages['auth/register']);
       this.$router.push('/login');
     }
   }
