@@ -1,21 +1,24 @@
 <template>
-  <div class="app-main-layout">
-    <Navbar @toggle="isSidebarOpen = !isSidebarOpen" />
-    <Sidebar v-model="isSidebarOpen" />
+  <div>
+    <Loader v-if="loading" />
+    <div v-else class="app-main-layout">
+      <Navbar @toggle="isSidebarOpen = !isSidebarOpen" />
+      <Sidebar v-model="isSidebarOpen" />
 
-    <main 
-      class="app-content"
-      :class="{full: !isSidebarOpen}"
-    >
-      <div class="app-page">
-        <router-view/>
+      <main 
+        class="app-content"
+        :class="{full: !isSidebarOpen}"
+      >
+        <div class="app-page">
+          <router-view/>
+        </div>
+      </main>
+
+      <div class="fixed-action-btn">
+        <router-link to="/record" class="btn-floating btn-large" v-tooltip="'Add new record'" data-position="left">
+          <i class="large material-icons">add</i>
+        </router-link>
       </div>
-    </main>
-
-    <div class="fixed-action-btn">
-      <router-link to="/record" class="btn-floating btn-large">
-        <i class="large material-icons">add</i>
-      </router-link>
     </div>
   </div>
 </template>
@@ -23,13 +26,32 @@
 <script>
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
+import messages from '@/utils/messages'
 
 export default {
   name: 'main-layout',
   data() {
     return {
-      isSidebarOpen: true
+      isSidebarOpen: true,
+      loading: true
     }
+  },
+  computed: {
+    error() {
+      return this.$store.getters.error;
+    }
+  },
+  watch: {
+    error(firebaseError) {
+      this.$errorNotification(messages[firebaseError.code] || 'Something went wrong.');
+    }
+  },
+  async mounted() {
+    if (!Object.keys(this.$store.getters.info).length) {
+      await this.$store.dispatch('fetchInfo');
+    }
+
+    this.loading = false;
   },
   components: {
     Navbar,

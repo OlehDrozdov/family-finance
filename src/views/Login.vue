@@ -34,7 +34,7 @@
     </div>
     <div class="card-action">
       <div>
-        <button class="btn waves-effect waves-light auth-submit" type="submit">
+        <button class="btn auth-submit" type="submit">
           Login
           <i class="material-icons right">send</i>
         </button>
@@ -69,6 +69,7 @@ export default {
   mounted() {
     if (messages[this.$route.query.message]) {
       this.$notification(messages[this.$route.query.message]);
+      this.$router.replace('/login');
     }
   },
   methods: {
