@@ -44,6 +44,7 @@
 import Modal from '@/components/Modal';
 
 export default {
+  name: 'history-records',
   props: {
     records: {
       type: Array,

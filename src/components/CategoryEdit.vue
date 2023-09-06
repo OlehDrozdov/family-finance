@@ -63,6 +63,7 @@ import M from 'materialize-css';
 import messages from '@/utils/messages'
 
 export default {
+  name: 'category-edit',
   props: {
     categories: {
       type: Array,

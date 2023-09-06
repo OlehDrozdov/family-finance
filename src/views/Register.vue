@@ -100,7 +100,7 @@ import { required, email, minLength, sameAs } from '@vuelidate/validators'
 import messages from '@/utils/messages'
 
 export default {
-  name: 'register',
+  name: 'register-component',
   data() {
     return {
       v$: useVuelidate(),

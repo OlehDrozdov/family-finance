@@ -21,6 +21,7 @@
 
 <script>
 export default {
+  name: 'sidebar-component',
   props: {
     modelValue: {
       type: Boolean

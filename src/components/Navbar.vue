@@ -48,6 +48,7 @@
 import M from 'materialize-css'
 
 export default {
+  name: 'navbar-component',
   data() {
     return {
       date: Date.now(),

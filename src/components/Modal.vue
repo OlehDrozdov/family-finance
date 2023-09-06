@@ -21,6 +21,7 @@
 import M from 'materialize-css'
 
 export default {
+  name: 'modal-component',
   props: {
     title: String,
     content: Object,

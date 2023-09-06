@@ -51,6 +51,7 @@ import M from 'materialize-css'
 import messages from '@/utils/messages'
 
 export default {
+  name: 'category-create',
   data() {
     return {
       v$: useVuelidate(),

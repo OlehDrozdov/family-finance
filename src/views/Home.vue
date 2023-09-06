@@ -22,6 +22,7 @@ import HomeBill from '@/components/HomeBill'
 import HomeCurrency from '@/components/HomeCurrency'
 
 export default {
+  name: 'home-component',
   data() {
      return {
       loading: true,

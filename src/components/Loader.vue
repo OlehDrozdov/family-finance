@@ -16,6 +16,7 @@
 
 <script>
 export default {
+  name: 'loader-component',
   computed: {
     color() {
       const colors = ['spinner-red-only', 'spinner-blue-only', 'spinner--only'];

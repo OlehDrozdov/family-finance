@@ -26,7 +26,7 @@
 import HistoryRecords from '@/components/HistoryRecords'
 
 export default {
-  name: history,
+  name: 'history-component',
   data() {
     return {
       categories: [],

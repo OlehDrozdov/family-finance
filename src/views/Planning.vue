@@ -35,7 +35,7 @@ import { mapGetters } from 'vuex';
 import messages from '@/utils/messages'
 
 export default {
-  name: "planning",
+  name: 'planning-component',
   data() {
     return {
       categories: [],

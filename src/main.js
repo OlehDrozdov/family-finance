@@ -37,6 +37,7 @@ onAuthStateChanged(auth, () => {
     app.use(currencyFilter);
     app.use(notificationPlugin);
     app.directive('tooltip', tooltipDirective);
+    // eslint-disable-next-line
     app.component('Loader', Loader);
 
     app.mount('#app');
