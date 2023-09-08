@@ -2,7 +2,6 @@
   <div id="modal" class="modal">
     <div class="modal-content">
       <h4>{{ title }}</h4>
-      <hr />
       <div class="card" :class="color">
         <div class="card-content white-text">
           <div v-for="(value, key) in content" :key="key">
@@ -37,13 +36,12 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   #modal {
     border-radius: 5px;
 
     .card-content {
       line-height: 2rem;
-      letter-spacing: 1px;
     }
 
     .modal-close {

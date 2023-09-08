@@ -7,6 +7,7 @@ import currencyFilter from './filters/currency.filter'
 import notificationPlugin from '@/utils/notification.plugin'
 import tooltipDirective from './directives/tooltip.directive'
 import Loader from '@/components/Loader'
+import Paginate from "vuejs-paginate-next"
 import './registerServiceWorker'
 import 'materialize-css/dist/js/materialize.min'
 
@@ -37,8 +38,8 @@ onAuthStateChanged(auth, () => {
     app.use(currencyFilter);
     app.use(notificationPlugin);
     app.directive('tooltip', tooltipDirective);
-    // eslint-disable-next-line
     app.component('Loader', Loader);
+    app.component('Paginate', Paginate);
 
     app.mount('#app');
   }

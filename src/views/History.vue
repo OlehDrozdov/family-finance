@@ -11,7 +11,16 @@
     <Loader v-if="loading" />
 
     <section v-else-if="records.length">
-      <HistoryRecords :records="records" />
+      <HistoryRecords :records="items" />
+
+      <Paginate
+        v-model="page"
+        :page-count="pageCount"
+        :click-handler="onPageChange"
+        :prev-text="prevButton"
+        :next-text="nextButton"
+        :container-class="'pagination'"
+      />
     </section>
 
     <p v-else class="center">
@@ -23,29 +32,32 @@
 </template>
 
 <script>
+import PaginateMixin from '@/mixins/paginate.mixin'
 import HistoryRecords from '@/components/HistoryRecords'
 
 export default {
   name: 'history-component',
+  mixins: [PaginateMixin],
   data() {
     return {
-      categories: [],
       records: [],
       loading: true
     }
   },
-  async mounted() {
-    const records = await this.$store.dispatch('fetchRecords');
-    this.categories = await this.$store.dispatch('fetchCategories');
+  async mounted() {    
+    const categories = await this.$store.dispatch('fetchCategories');
+    this.records = await this.$store.dispatch('fetchRecords');
 
-    this.records = records.map(record => {
+    this.records = this.records.map(record => {
       return {
         ...record,
-        categoryTitle: this.categories.find(category => category.id === record.categoryID).title,
+        categoryTitle: categories.find(category => category.id === record.categoryID).title,
         typeTitle: record.type.replace(/^./, match => match.toUpperCase()),
         typeClass: record.type === 'outcome' ? 'red lighten-2' : 'green lighten-2'
       }
     });
+
+    this.setupPaginate(this.records);
 
     this.loading = false;
   },
@@ -54,3 +66,14 @@ export default {
   }
 }
 </script> 
+
+<style lang="scss">
+  .pagination {
+    li {
+      cursor: pointer;
+    }
+    .active {
+      background-color: teal !important;
+    }
+  }
+</style>

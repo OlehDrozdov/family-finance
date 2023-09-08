@@ -7,7 +7,7 @@
         <th>Date</th>
         <th>Category</th>
         <th>Type</th>
-        <th>Open</th>
+        <th>Details</th>
       </tr>
     </thead>
 
@@ -74,7 +74,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .badge {
   min-width: 75px !important;
 }
