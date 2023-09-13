@@ -51,7 +51,7 @@ export default {
   name: 'navbar-component',
   data() {
     return {
-      date: Date.now(),
+      date: new Date(),
       dateInterval: null,
       dropdown: null,
       loading: true

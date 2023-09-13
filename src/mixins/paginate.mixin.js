@@ -1,3 +1,5 @@
+import _chunk from 'lodash/chunk';
+
 export default {
   data() {
     return {
@@ -23,16 +25,9 @@ export default {
     },
     setupPaginate(allItems, pageSize = this.pageSize) {
       this.pageSize = pageSize;
-      this.allItems = this.chunkArray(allItems, this.pageSize);
+      this.allItems = _chunk(allItems, this.pageSize);
       this.pageCount = this.allItems.length;
       this.items = this.allItems[this.page -1] || this.allItems[0]; 
-    },
-    chunkArray(array, chunkSize) {
-      const chunks = [];
-      for (let i = 0; i < array.length; i += chunkSize) {
-        chunks.push(array.slice(i, i + chunkSize));
-      }
-      return chunks;
     }
   }
 }

@@ -8,7 +8,7 @@
 
     <form class="form" v-else-if="categories.length" @submit.prevent="onSubmit">
       <div class="input-field">
-        <select ref="select" v-model="category">
+        <select ref="select" v-model="categoryID">
           <option
               v-for="category in categories"
               :key="category.id"
@@ -103,7 +103,7 @@ export default {
   data() {
     return {
       categories: [],
-      category: null,
+      categoryID: null,
       select: null,
       loading: true,
       type: 'outcome',
@@ -140,11 +140,12 @@ export default {
       if (this.createRecordCheck) {
         try {
           await this.$store.dispatch('createRecord', {
-            categoryID: this.category,
+            categoryID: this.categoryID,
+            categoryTitle: this.categories.find(category => category.id === this.categoryID).title,
             amount: this.amount,
             description: this.description,
             type: this.type,
-            date: new Date().toLocaleString()
+            date: new Date().toJSON()
           });
 
           const bill = this.type === 'income' ? this.info.bill + this.amount : this.info.bill - this.amount;
@@ -171,7 +172,7 @@ export default {
     this.loading = false;
 
     if (this.categories.length) {
-      this.category = this.categories[0].id;
+      this.categoryID = this.categories[0].id;
     }
   },
   updated() {
